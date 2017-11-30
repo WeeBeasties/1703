@@ -1,0 +1,81 @@
+--- 
+title: "Ferris Graduate Survey Summary 2010-2015^[Report number 1703, DOI [10.17605/OSF.IO/MRJBD](https://doi.org/10.17605/OSF.IO/MRJBD)]"
+subtitle: "An overview of parts of the surveys created in Fall 2017"
+author: 
+  - "Dr. Clifton Franklund"
+  - "General Education Coordinator"
+date: "Fall 2017"
+output: 
+  bookdown::gitbook:
+    includes:
+      after_body: disqus.html
+description: An analysis of graduate survey results from 2010 through 2015. This report may be used to evaluate the overall attitudes of our recent graduates concerning their time at Ferris.
+documentclass: article
+github-repo: WeeBeasties/1703
+link-citations: yes
+bibliography: references.bib
+site: bookdown::bookdown_site
+biblio-style: apalike
+---
+\addtolength{\headheight}{0.7cm}
+\thispagestyle{fancyplain}
+\lhead{\includegraphics[height=0.5cm]{art/logo.png}}
+\rhead{}
+\renewcommand{\headrulewidth}{0pt}
+
+```{R packages, echo=FALSE, message=FALSE, warning=FALSE}
+
+#----------------------------------------------------------------------------------------
+#	LOAD PACKAGES
+#----------------------------------------------------------------------------------------
+
+library(tidyverse)	# tidy data science
+library(googlesheets)   # scrape Google sheet data from the web
+library(pander)         # used to report session settings
+```
+
+
+# Executive Summary {#summary -}
+> "Assessment is not a spreadsheet; it's a conversation."
+> --- Irmeli Halinen
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur pellentesque tortor ac turpis congue venenatis. Curabitur congue justo est, non feugiat massa euismod sit amet. Fusce tincidunt, sapien in malesuada tempus, sem mi interdum turpis, in finibus sem nisl sed ex. Mauris in tristique nisl. Nunc pellentesque metus et velit aliquam, eu rhoncus diam condimentum. Quisque nec libero at odio tempor aliquam. Fusce at lacus porttitor, lobortis nisl nec, commodo tellus. Phasellus interdum sapien varius ipsum consectetur tincidunt. Aenean posuere turpis at efficitur lobortis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur pellentesque tortor ac turpis congue venenatis. Curabitur congue justo est, non feugiat massa euismod sit amet. Fusce tincidunt, sapien in malesuada tempus, sem mi interdum turpis, in finibus sem nisl sed ex. Mauris in tristique nisl. Nunc pellentesque metus et velit aliquam, eu rhoncus diam condimentum. Quisque nec libero at odio tempor aliquam. Fusce at lacus porttitor, lobortis nisl nec, commodo tellus. Phasellus interdum sapien varius ipsum consectetur tincidunt. Aenean posuere turpis at efficitur lobortis. 
+
+# Introduction {#introduction -}
+
+
+# Methods {#methods -}
+
+## Data provenance {-}
+Data provenance refers to a system that permits tracking of the origin, movement, modification, and utilization of data sets [@Buneman2001]. The provenance of General Education data will be explicitly declared to facilitate the reproducibility and extensibility of these studies.
+
+### Location of public website files {-}
+All files related to this report can be found online at the Open Science Framework [@Nosek2012]. This site contains all of the files needed to reproduce this report from the de-identified data set. The site's url is [https://osf.io/t6u8m/](https://osf.io/t6u8m/).
+
+### Session information {-}
+This report was written using RStudio [@Rstudio] and the R statistical programming language [@R]. These products are free to download for PC, Macintosh, and Linux operating systems. The following information pertains to the session parameters used to generate this report. If you have trouble reproducing this report, it may be due to different session parameters. You may contact [Dr. Franklund](mailto:CliftonFranklund@ferris.edu) if you need assistance.
+
+```{R Session, echo=FALSE, comment=FALSE, error=FALSE, results='asis'}
+pander(sessionInfo())
+```
+
+### Processing instructions {-}
+This project produced a computationally reproducible assessment report (this document). Anyone wishing to recreate this report from the source document will need to install the following on their computer:
+
+1. [An installation of the R programming language](https://www.r-project.org)
+2. [An installation of the RStudio IDE](https://www.rstudio.com/products/rstudio/download3/)
+3. [An installation of LaTeX](https://www.latex-project.org/get/)
+
+The necessary source files include the de-identified data set (BIOL200Data.csv), Rmarkdown code files (index.Rmd, 01-Introduction.Rmd, 02-Methods.Rmd, 03-Results.Rmd, 04-Discussion.Rmd, and 05-References.Rmd), bibtex reference file (references.bib), and custom art file in the /art folder.
+
+To process the files, you must first open the project in RStudio. Click on the "Build Book" button in the Build menu. Bookdown allows you to build this project as git_book (html site), pdf_book (via LaTeX), or epub_book (compatible with iBooks and other e-book readers).
+
+### Citation of this work {-}
+All of the de-identified data, analysis code, and documentation that constitute this report project may be freely used, modified, and shared. The de-identified data set, BIOL200Data.csv, is released under the Creative Commons [CC0 license](https://creativecommons.org/publicdomain/zero/1.0/). All documentation, including README.md, Codebook.md, and this report, are released under the Creative Commons [CC-BY](https://creativecommons.org/licenses/by/4.0/) licence. Any questions, comments, or suggestions may be sent to [Dr. Franklund](mailto:CliftonFranklund@ferris.edu).
+
+## Retrieving the registration data {#googlesheets -}  
+
+## Data collection {#data -}
+All registration records for the fall of 2017 were collated and de-identified. The data file, 'registrations.csv', contains only the course name (e.g. BIOL 101), the core competency (e.g. Natural Sciences), and the standardized measure (e.g. Selected Response Exam). The datafile is [available here](data/registrations.csv).
+
+# Results and Discussion {#results -}  

@@ -1,0 +1,18 @@
+\usepackage{tgheros,tgtermes,tgcursor}
+\usepackage[]{graphicx}
+\usepackage[]{color}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage{environ}
+\NewEnviron{question}%
+  {\begin{center}%
+   \indent\fcolorbox{black}{gray!10}%
+     {\parbox{40em}%
+       {\vspace{7pt}\par
+        \BODY
+        \vspace{7pt}\par
+       }%
+     }%
+   \end{center}%
+  }

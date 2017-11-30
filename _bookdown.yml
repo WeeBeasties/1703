@@ -1,0 +1,11 @@
+book_filename: "Report-1703"
+chapter_name: ""
+repo: https://github.com/WeeBeasties/1703
+output_dir: docs
+rmd_files:
+  html: ["index.Rmd","references.Rmd"]
+  latex: ["index.Rmd"]
+clean: [packages.bib, bookdown.bbl]
+new_session: no
+comments: true
+edit: https://github.com/WeeBeasties/1703/blob/master/%s

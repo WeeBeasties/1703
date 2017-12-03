@@ -39,9 +39,9 @@ ggplot(data = totals, aes(x=year, y=responses, label=responses)) +
 
 questions <- read_csv("data/grad_survey_questions.csv")
 plot1 <- questions %>%
-	filter(item==3)
+	filter(item==21)
 plot1$disagree <- round((plot1$level1+plot1$level2)/totals$responses*100,1)
-plot1$agree <- round(plot1$level4/totals$responses*100,1)
+plot1$agree <- round(plot1$level3+plot1$level4/(totals$responses-plot1$level0)*100,1)
 
 
 
@@ -50,5 +50,8 @@ plot1 %>%
 	ggplot(aes(x=year, y=responses, group=attitude, colour=attitude)) +
 	geom_line(size=1) +
 	geom_point(fill="white", size=4) +
+	ylim(0,100) +
+	ylab("Percent of Valid Responses") +
+	xlab("Year") +
 	theme_linedraw()
 

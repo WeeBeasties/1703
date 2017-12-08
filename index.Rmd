@@ -121,9 +121,12 @@ All of the de-identified data, analysis code, and documentation that constitute 
 
 # Results and Discussion {#results -}  
 
-
+The response rates and their overall composition were compared for the six academic years under investigation. Responses to seven of the more quantitative questions (numbers 1, 2, 3, 4, 21, 22, and 23) were also examined. In general, student satisfaction is fairly constant or slightly improving. A more complete examination of each comparision is provided below.
 
 ## Response rate by year {#responses -}
+
+Student response rates for the graduation survey have generally been sufficient over the past six years to allow generalizations to be drawn for the entire population of Ferris graduates.  Figure \@ref(fig:responses) shows the total number of alumni responses collected each academic year. The fewest responses, `r totals[totals$responses==min(totals$responses),2]`, were collected in `r totals[totals$responses==min(totals$responses),1]` (17% response rate). There has been a steady improvement in response rate since that time. The overall average response rate was `r round(mean(totals$responses),0)` per year for the interval investigated (approximately a 25% overall return rate). 
+
 ```{R responses, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Total number of student survey responses per academic year"}
 
 #----------------------------------------------------------------------------------------
@@ -141,7 +144,12 @@ ggplot(data = totals, aes(x=year, y=responses, label=responses)) +
 ```
 
 
+```{block, type='question'}
+Is a response rate of under 30% adequate? What should our target reponse rate be for this instrument? What can be done differently to increase our response rate further?
+```
+
 ## Response rate by degree earned {#degrees -}
+
 ```{R degrees, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Percent of student survey responses by degree earned per academic year"}
 
 #----------------------------------------------------------------------------------------
@@ -158,6 +166,11 @@ ggplot(data = degrees, aes(x=year, y=percent, group=Degree, fill=Degree)) +
 	xlab("Academic Year") +
 	theme(text = element_text(size=13), legend.position="top",legend.box="horizontal")
 
+```
+
+
+```{block, type='question'}
+Do you think that there are too many exams in this mix? What is the desired balance between exams, products, and performances for General Education?
 ```
 
 ## Response rate by college {#colleges -}
@@ -179,11 +192,16 @@ ggplot(data = colleges, aes(x=year, y=percent, group=College, fill=College)) +
 
 ```
 
+
+```{block, type='question'}
+Do you think that there are too many exams in this mix? What is the desired balance between exams, products, and performances for General Education?
+```
+
 ## Overall satisfaction ratings {#Q1 -}
-```{R question1, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="I am satisfied with the quality of education that I received at FSU/KCAD."}
+```{R percent1, echo=FALSE, message=FALSE, warning=FALSE}
 
 #----------------------------------------------------------------------------------------
-#	STUDENT RESPONSES TO SURVEY QUESTION 1
+#	CALCULATE PERCENT RESPONSES TO SURVEY QUESTION 1
 #----------------------------------------------------------------------------------------
 
 plot1 <- questions %>%
@@ -194,6 +212,16 @@ plot1$'2: Somewhat Disagree' <- round((plot1$level2)/totals$responses*100,1)
 plot1$'3: Somewhat Agree'    <- round((plot1$level3)/totals$responses*100,1)
 plot1$'4: Strongly Agree'    <- round((plot1$level4)/totals$responses*100,1)
 plot1$'Total positive (3+4)' <- plot1$`4: Strongly Agree`+plot1$`3: Somewhat Agree`
+
+```
+
+The overall satisfaction was `r round(mean(plot1$'Total positive (3+4)'),1)`%.
+
+```{R question1, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="I am satisfied with the quality of education that I received at FSU/KCAD."}
+
+#----------------------------------------------------------------------------------------
+#	PLOT STUDENT RESPONSES TO SURVEY QUESTION 1
+#----------------------------------------------------------------------------------------
 
 plot1 %>%
 	gather(Attitude,responses, '1: Strongly Disagree':'Total positive (3+4)') %>%
@@ -212,6 +240,10 @@ plot1 %>%
 
 ```
 
+```{block, type='question'}
+Do you think that there are too many exams in this mix? What is the desired balance between exams, products, and performances for General Education?
+```
+
 ## Preparation for employment {#Q2 -}
 ```{R question2, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="FSU/KCAD prepared me well for employment."}
 
@@ -219,16 +251,16 @@ plot1 %>%
 #	STUDENT RESPONSES TO SURVEY QUESTION 2
 #----------------------------------------------------------------------------------------
 
-plot1 <- questions %>%
+plot2 <- questions %>%
 	filter(item==2)
 
-plot1$'1: Strongly Disagree' <- round((plot1$level1)/totals$responses*100,1)
-plot1$'2: Somewhat Disagree' <- round((plot1$level2)/totals$responses*100,1)
-plot1$'3: Somewhat Agree'    <- round((plot1$level3)/totals$responses*100,1)
-plot1$'4: Strongly Agree'    <- round((plot1$level4)/totals$responses*100,1)
-plot1$'Total positive (3+4)' <- plot1$`4: Strongly Agree`+plot1$`3: Somewhat Agree`
+plot2$'1: Strongly Disagree' <- round((plot2$level1)/totals$responses*100,1)
+plot2$'2: Somewhat Disagree' <- round((plot2$level2)/totals$responses*100,1)
+plot2$'3: Somewhat Agree'    <- round((plot2$level3)/totals$responses*100,1)
+plot2$'4: Strongly Agree'    <- round((plot2$level4)/totals$responses*100,1)
+plot2$'Total positive (3+4)' <- plot2$`4: Strongly Agree`+plot2$`3: Somewhat Agree`
 
-plot1 %>%
+plot2 %>%
 	gather(Attitude,responses, '1: Strongly Disagree':'Total positive (3+4)') %>%
 	ggplot(aes(x=year, y=responses, group=Attitude, colour=Attitude)) +                   # Plot percentages by year
 	scale_linetype_manual(values = c(1,1,1,1,2)) +                                        # Line styles
@@ -245,6 +277,10 @@ plot1 %>%
 
 ```
 
+```{block, type='question'}
+Do you think that there are too many exams in this mix? What is the desired balance between exams, products, and performances for General Education?
+```
+
 ## Preparation for continuing education {#Q3 -}
 ```{R question3, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="FSU/KCAD prepared me well for continuing my education."}
 
@@ -252,16 +288,16 @@ plot1 %>%
 #	STUDENT RESPONSES TO SURVEY QUESTION 3
 #----------------------------------------------------------------------------------------
 
-plot1 <- questions %>%
+plot3 <- questions %>%
 	filter(item==3)
 
-plot1$'1: Strongly Disagree' <- round((plot1$level1)/totals$responses*100,1)
-plot1$'2: Somewhat Disagree' <- round((plot1$level2)/totals$responses*100,1)
-plot1$'3: Somewhat Agree'    <- round((plot1$level3)/totals$responses*100,1)
-plot1$'4: Strongly Agree'    <- round((plot1$level4)/totals$responses*100,1)
-plot1$'Total positive (3+4)' <- plot1$`4: Strongly Agree`+plot1$`3: Somewhat Agree`
+plot3$'1: Strongly Disagree' <- round((plot3$level1)/totals$responses*100,1)
+plot3$'2: Somewhat Disagree' <- round((plot3$level2)/totals$responses*100,1)
+plot3$'3: Somewhat Agree'    <- round((plot3$level3)/totals$responses*100,1)
+plot3$'4: Strongly Agree'    <- round((plot3$level4)/totals$responses*100,1)
+plot3$'Total positive (3+4)' <- plot3$`4: Strongly Agree`+plot3$`3: Somewhat Agree`
 
-plot1 %>%
+plot3 %>%
 	gather(Attitude,responses, '1: Strongly Disagree':'Total positive (3+4)') %>%
 	ggplot(aes(x=year, y=responses, group=Attitude, colour=Attitude)) +                   # Plot percentages by year
 	scale_linetype_manual(values = c(1,1,1,1,2)) +                                        # Line styles
@@ -276,6 +312,10 @@ plot1 %>%
 	theme(text = element_text(size=12), legend.position="top", legend.direction="vertical")
 
 
+```
+
+```{block, type='question'}
+Do you think that there are too many exams in this mix? What is the desired balance between exams, products, and performances for General Education?
 ```
 
 ## Good value for the money {#Q4 -}
@@ -285,16 +325,16 @@ plot1 %>%
 #	STUDENT RESPONSES TO SURVEY QUESTION 4
 #----------------------------------------------------------------------------------------
 
-plot1 <- questions %>%
+plot4 <- questions %>%
 	filter(item==4)
 
-plot1$'1: Strongly Disagree' <- round((plot1$level1)/totals$responses*100,1)
-plot1$'2: Somewhat Disagree' <- round((plot1$level2)/totals$responses*100,1)
-plot1$'3: Somewhat Agree'    <- round((plot1$level3)/totals$responses*100,1)
-plot1$'4: Strongly Agree'    <- round((plot1$level4)/totals$responses*100,1)
-plot1$'Total positive (3+4)' <- plot1$`4: Strongly Agree`+plot1$`3: Somewhat Agree`
+plot4$'1: Strongly Disagree' <- round((plot4$level1)/totals$responses*100,1)
+plot4$'2: Somewhat Disagree' <- round((plot4$level2)/totals$responses*100,1)
+plot4$'3: Somewhat Agree'    <- round((plot4$level3)/totals$responses*100,1)
+plot4$'4: Strongly Agree'    <- round((plot4$level4)/totals$responses*100,1)
+plot4$'Total positive (3+4)' <- plot4$`4: Strongly Agree`+plot4$`3: Somewhat Agree`
 
-plot1 %>%
+plot4 %>%
 	gather(Attitude,responses, '1: Strongly Disagree':'Total positive (3+4)') %>%
 	ggplot(aes(x=year, y=responses, group=Attitude, colour=Attitude)) +                   # Plot percentages by year
 	scale_linetype_manual(values = c(1,1,1,1,2)) +                                        # Line styles
@@ -311,6 +351,10 @@ plot1 %>%
 
 ```
 
+```{block, type='question'}
+Do you think that there are too many exams in this mix? What is the desired balance between exams, products, and performances for General Education?
+```
+
 ## Recommendation of Ferris/KCAD {#Q21 -}
 ```{R question21, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Since graduating, how often have you recommended FSU/KCAD to prospective students?"}
 
@@ -318,16 +362,16 @@ plot1 %>%
 #	STUDENT RESPONSES TO SURVEY QUESTION 21
 #----------------------------------------------------------------------------------------
 
-plot1 <- questions %>%
+plot21 <- questions %>%
 	filter(item==21)
 
-plot1$'1: Never' <- round((plot1$level1)/totals$responses*100,1)
-plot1$'2: Once or twice' <- round((plot1$level2)/totals$responses*100,1)
-plot1$'3: A few times'    <- round((plot1$level3)/totals$responses*100,1)
-plot1$'4: Often'    <- round((plot1$level4)/totals$responses*100,1)
-plot1$'Total positive (3+4)' <- plot1$`4: Often`+plot1$`3: A few times`
+plot21$'1: Never' <- round((plot21$level1)/totals$responses*100,1)
+plot21$'2: Once or twice' <- round((plot21$level2)/totals$responses*100,1)
+plot21$'3: A few times'    <- round((plot21$level3)/totals$responses*100,1)
+plot21$'4: Often'    <- round((plot21$level4)/totals$responses*100,1)
+plot21$'Total positive (3+4)' <- plot21$`4: Often`+plot21$`3: A few times`
 
-plot1 %>%
+plot21 %>%
 	gather(Recommended,responses, '1: Never':'Total positive (3+4)') %>%
 	ggplot(aes(x=year, y=responses, group=Recommended, colour=Recommended)) +              # Plot percentages by year
 	scale_linetype_manual(values = c(1,1,1,1,2)) +                                        # Line styles
@@ -344,6 +388,10 @@ plot1 %>%
 
 ```
 
+```{block, type='question'}
+Do you think that there are too many exams in this mix? What is the desired balance between exams, products, and performances for General Education?
+```
+
 ## Would choose FSU/KCAD again {#Q22 -}
 ```{R question22, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="If I had the opportunity to start college over, I would still choose to attend FSU/KCAD."}
 
@@ -351,16 +399,16 @@ plot1 %>%
 #	STUDENT RESPONSES TO SURVEY QUESTION 22
 #----------------------------------------------------------------------------------------
 
-plot1 <- questions %>%
+plot22 <- questions %>%
 	filter(item==22)
 
-plot1$'1: Strongly Disagree' <- round((plot1$level1)/totals$responses*100,1)
-plot1$'2: Somewhat Disagree' <- round((plot1$level2)/totals$responses*100,1)
-plot1$'3: Somewhat Agree'    <- round((plot1$level3)/totals$responses*100,1)
-plot1$'4: Strongly Agree'    <- round((plot1$level4)/totals$responses*100,1)
-plot1$'Total positive (3+4)' <- plot1$`4: Strongly Agree`+plot1$`3: Somewhat Agree`
+plot22$'1: Strongly Disagree' <- round((plot22$level1)/totals$responses*100,1)
+plot22$'2: Somewhat Disagree' <- round((plot22$level2)/totals$responses*100,1)
+plot22$'3: Somewhat Agree'    <- round((plot22$level3)/totals$responses*100,1)
+plot22$'4: Strongly Agree'    <- round((plot22$level4)/totals$responses*100,1)
+plot22$'Total positive (3+4)' <- plot22$`4: Strongly Agree`+plot22$`3: Somewhat Agree`
 
-plot1 %>%
+plot22 %>%
 	gather(Attitude,responses, '1: Strongly Disagree':'Total positive (3+4)') %>%
 	ggplot(aes(x=year, y=responses, group=Attitude, colour=Attitude)) +                   # Plot percentages by year
 	scale_linetype_manual(values = c(1,1,1,1,2)) +                                        # Line styles
@@ -377,6 +425,10 @@ plot1 %>%
 
 ```
 
+```{block, type='question'}
+Do you think that there are too many exams in this mix? What is the desired balance between exams, products, and performances for General Education?
+```
+
 ## Would choose the same program again {#Q23 -}
 ```{R question23, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="If I had the opportunity to start college over, I would still choose the same program of study."}
 
@@ -384,16 +436,16 @@ plot1 %>%
 #	STUDENT RESPONSES TO SURVEY QUESTION 23
 #----------------------------------------------------------------------------------------
 
-plot1 <- questions %>%
+plot23 <- questions %>%
 	filter(item==23)
 
-plot1$'1: Strongly Disagree' <- round((plot1$level1)/totals$responses*100,1)
-plot1$'2: Somewhat Disagree' <- round((plot1$level2)/totals$responses*100,1)
-plot1$'3: Somewhat Agree'    <- round((plot1$level3)/totals$responses*100,1)
-plot1$'4: Strongly Agree'    <- round((plot1$level4)/totals$responses*100,1)
-plot1$'Total positive (3+4)' <- plot1$`4: Strongly Agree`+plot1$`3: Somewhat Agree`
+plot23$'1: Strongly Disagree' <- round((plot23$level1)/totals$responses*100,1)
+plot23$'2: Somewhat Disagree' <- round((plot23$level2)/totals$responses*100,1)
+plot23$'3: Somewhat Agree'    <- round((plot23$level3)/totals$responses*100,1)
+plot23$'4: Strongly Agree'    <- round((plot23$level4)/totals$responses*100,1)
+plot23$'Total positive (3+4)' <- plot23$`4: Strongly Agree`+plot23$`3: Somewhat Agree`
 
-plot1 %>%
+plot23 %>%
 	gather(Attitude,responses, '1: Strongly Disagree':'Total positive (3+4)') %>%
 	ggplot(aes(x=year, y=responses, group=Attitude, colour=Attitude)) +                   # Plot percentages by year
 	scale_linetype_manual(values = c(1,1,1,1,2)) +                                        # Line styles
@@ -408,4 +460,8 @@ plot1 %>%
 	theme(text = element_text(size=12), legend.position="top", legend.direction="vertical")
 
 
+```
+
+```{block, type='question'}
+Do you think that there are too many exams in this mix? What is the desired balance between exams, products, and performances for General Education?
 ```

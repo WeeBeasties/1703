@@ -5,6 +5,11 @@ library(ggplot2)
 library(tidyr)
 library(RColorBrewer)
 
+missingData <- read_csv("rawData/2015:2016.csv")
+degreeData <- missingData %>%
+	group_by(Degree) %>%
+	tally
+
 myData <- read_csv("data/grad_survey_colleges.csv")
 totals <- ddply(myData, "year", numcolwise(sum))
 totalVec <- NULL

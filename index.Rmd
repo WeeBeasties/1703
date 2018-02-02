@@ -43,6 +43,8 @@ library(pander)         # used to report session settings
 #	LOAD DATA FROM FILES
 #----------------------------------------------------------------------------------------
 
+factbookColleges <- read_csv("data/factbook_colleges.csv")
+factbookDegrees <- read_csv("data/factbook_degrees.csv")
 colleges <- read_csv("data/grad_survey_colleges.csv")
 degrees <- read_csv("data/grad_survey_degrees.csv")
 questions <- read_csv("data/grad_survey_questions.csv")
@@ -55,8 +57,18 @@ questions <- read_csv("data/grad_survey_questions.csv")
 #	PROCESS THE DATA FOR PLOTTING
 #----------------------------------------------------------------------------------------
 
-totals <- ddply(colleges, "year", numcolwise(sum))
+factbookTotals <- ddply(factbookColleges, "year", numcolwise(sum))
+totalFactbookVec <- NULL
+for (i in 1:6) {
+	totalFactbookVec <- c(totalFactbookVec,rep(factbookTotals[i,2],9))
+}
+factbookColleges$percent <- round(factbookColleges$responses/totalFactbookVec*100,1)
+factbookColleges <- factbookColleges %>%
+	group_by(year) %>%
+	mutate(pos=100-(cumsum(percent)-0.5*percent))
 
+
+totals <- ddply(colleges, "year", numcolwise(sum))
 totalVec <- NULL
 for (i in 1:6) {
 	totalVec <- c(totalVec,rep(totals[i,2],9))
@@ -64,7 +76,19 @@ for (i in 1:6) {
 colleges$percent <- round(colleges$responses/totalVec*100,1)
 colleges <- colleges %>%
 	group_by(year) %>%
-	mutate(pos=cumsum(percent)-0.5*percent)
+	mutate(pos=100-(cumsum(percent)-0.5*percent))
+
+
+totalFactbookDegrees <- ddply(factbookDegrees, "year", numcolwise(sum))
+totalFactbookDegreeVec <- NULL
+for (i in 1:6) {
+	totalFactbookDegreeVec <- c(totalFactbookDegreeVec,rep(totalFactbookDegrees[i,2],4))
+}
+factbookDegrees$percent <- round(factbookDegrees$responses/totalFactbookDegreeVec*100,1)
+factbookDegrees <- factbookDegrees %>%
+	group_by(year) %>%
+	mutate(pos=100-(cumsum(percent)-0.5*percent))
+
 
 totalDegrees <- ddply(degrees, "year", numcolwise(sum))
 totalDegreeVec <- NULL
@@ -74,7 +98,7 @@ for (i in 1:6) {
 degrees$percent <- round(degrees$responses/totalDegreeVec*100,1)
 degrees <- degrees %>%
 	group_by(year) %>%
-	mutate(pos=cumsum(percent)-0.5*percent)
+	mutate(pos=100-(cumsum(percent)-0.5*percent))
 
 ```
 
@@ -150,10 +174,10 @@ plot23$'Total positive (3+4)' <- plot23$`4: Strongly Agree`+plot23$`3: Somewhat 
 ```
 
 # Abstract {#abstract -}
-> "Assessment is not a spreadsheet; it's a conversation."
+> _Assessment is not a spreadsheet; it's a conversation._
 > --- Irmeli Halinen
 
-Student satisfaction data from the Ferris post-graduation surveys were compared from the 2010/2011 to 2015/2016 academic years. Over this timespan, the number of student respondents has noticeably improved. The lowest return rate (17%) was obtained in 2010/2011 and the highest (27%) was collected in 2015/2016. The average number of responses was `r round(mean(totals$responses),0)` per year for this interval. 
+Student satisfaction data from the Ferris post-graduation surveys were compared from the 2010/2011 to 2015/2016 academic years. Over this timespan, the response rate has noticeably improved. The lowest return rate (17%) was obtained in 2010/2011 and the highest (27%) was collected in 2015/2016. The average number of responses was `r round(mean(totals$responses),0)` per year for the time interval covered by this report.  The distribution of students by credential and by college was roughly in line with the overall composition of the Ferris student body. Bachelor's and graduate degree students were somewhat over-represented and those in certificate programs were under-represented. Student satisfaction on most Likert scale items was fairly high and stable over time. The item with the poorest scores was "how often have you recommended Ferris/Kendall to others". At this time, it is unclear why there is an apparent disconnect between student satisfaction and recommendation.  
 
 # Introduction {#introduction -}
 
@@ -216,10 +240,30 @@ ggplot(data = totals, aes(x=year, y=responses, label=responses)) +
 
 
 ```{block, type='question'}
-**Your thoughts?** Use the discussion forum below to comment. Is a response rate of under 30% adequate? What should our target reponse rate be for this instrument? What can be done differently to increase our response rate further?
+Is a response rate of under 30% adequate? What should our target reponse rate be for this instrument? What can be done differently to increase our response rate further?
 ```
 
 ## Response rate by degree earned {#degrees -}
+Here is the actual distribution of credentials awarded by Ferris for each of the past six years.
+```{R factbookDegrees, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Distribution of credentials awarded by Ferris per academic year"}
+
+#----------------------------------------------------------------------------------------
+#	NUMBER OF CREDENTIALS AWARDED
+#----------------------------------------------------------------------------------------
+
+myColors1 <- brewer.pal(4, "Set3")
+ggplot(data = factbookDegrees, aes(x=year, y=percent, group=Degree, fill=Degree)) +
+	geom_bar(stat="identity", color="black")+
+	scale_fill_discrete(guide=guide_legend(reverse=T)) +
+	scale_y_continuous(limits=c(0,100.5), breaks=c(0,20,40,60,80,100), name="Percent Credentials Awarded") +
+	geom_text(data=subset(factbookDegrees, percent>5), aes(y=pos, label=paste(percent,"%",sep="")), size=4, fontface = "bold") +
+	scale_fill_manual(values=myColors1) +
+	theme_linedraw() +
+	xlab("Academic Year") +
+	theme(text = element_text(size=13), legend.position="top",legend.direction="horizontal")
+
+```
+Here is the response rate by degree.
 
 ```{R degrees, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Percent of student survey responses by degree earned per academic year"}
 
@@ -229,13 +273,14 @@ ggplot(data = totals, aes(x=year, y=responses, label=responses)) +
 
 myColors1 <- brewer.pal(4, "Set3")
 ggplot(data = degrees, aes(x=year, y=percent, group=Degree, fill=Degree)) +
-	geom_bar(position=position_stack(reverse = TRUE), stat="identity", color="black")+
+	geom_bar(stat="identity", color="black")+
+	scale_fill_discrete(guide=guide_legend(reverse=T)) +
 	scale_y_continuous(limits=c(0,100.5), breaks=c(0,20,40,60,80,100), name="Percent Valid Responses") +
 	geom_text(data=subset(degrees, percent>5), aes(y=pos, label=paste(percent,"%",sep="")), size=4, fontface = "bold") +
 	scale_fill_manual(values=myColors1) +
 	theme_linedraw() +
 	xlab("Academic Year") +
-	theme(text = element_text(size=13), legend.position="top",legend.box="horizontal")
+	theme(text = element_text(size=13), legend.position="top",legend.direction="horizontal")
 
 ```
 
@@ -245,21 +290,28 @@ Do you think that there are too many exams in this mix? What is the desired bala
 ```
 
 ## Response rate by college {#colleges -}
+Here is the distribution of graduates by academic college for the past six years.
+```{R factbookColleges, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Distribution of graduates by academic college per academic year"}
 
-| College | 2013-2014 | 2014-2015 | 2015-2016 |
-| :-----: | :-------: | :-------: | :-------: |
-|   TE    |   20.9%   |   22.2%   |   21.5%   |
-|   PH    |    3.7%   |    3.3%   |    3.5%   |
-|   OP    |    1.2%   |    1.1%   |    1.0%   |
-|   KE    |    6.1%   |    5.4%   |    6.9%   |
-|   HP    |   18.3%   |   18.3%   |   18.1%   |
-|   ED    |   18.1%   |   17.5%   |   15.9%   | 
-|   CP    |    0.2%   |    0.6%   |    0.3%   |
-|   BU    |   20.9%   |   21.5%   |   22.6%   |
-|   AS    |   10.5%   |   10.0%   |   10.2%   |
+#----------------------------------------------------------------------------------------
+#	DISTRIBUTION OF GRADUATES BY ACADEMIC COLLEGE
+#----------------------------------------------------------------------------------------
 
-Table: Actual distribution of degrees awarded for the past three academic years
+myColors2 <- brewer.pal(9, "Set3")
+ggplot(data = factbookColleges, aes(x=year, y=percent, group=College, fill=College)) +
+	geom_bar(stat="identity", color="black") +
+	scale_fill_discrete(guide=guide_legend(reverse=T)) +
+	scale_y_continuous(limits=c(0,100.5), breaks=c(0,20,40,60,80,100), name="Percent of Graduates") +
+	geom_text(data=subset(factbookColleges, percent>5), aes(y=pos, label=paste(percent,"%",sep="")), size=4, fontface = "bold") +
+	scale_fill_manual(values=myColors2) +
+	theme_linedraw() +
+	xlab("Academic Year") +
+	theme(text = element_text(size=13), legend.position="top",legend.box="horizontal")
 
+```
+
+
+And here is the distribution of responses by college.
 ```{R colleges, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Percent of student survey responses by academic college per academic year"}
 
 #----------------------------------------------------------------------------------------
@@ -268,7 +320,8 @@ Table: Actual distribution of degrees awarded for the past three academic years
 
 myColors2 <- brewer.pal(9, "Set3")
 ggplot(data = colleges, aes(x=year, y=percent, group=College, fill=College)) +
-	geom_bar(position=position_stack(reverse = TRUE), stat="identity", color="black")+
+	geom_bar(stat="identity", color="black") +
+	scale_fill_discrete(guide=guide_legend(reverse=T)) +
 	scale_y_continuous(limits=c(0,100.5), breaks=c(0,20,40,60,80,100), name="Percent Valid Responses") +
 	geom_text(data=subset(colleges, percent>5), aes(y=pos, label=paste(percent,"%",sep="")), size=4, fontface = "bold") +
 	scale_fill_manual(values=myColors2) +

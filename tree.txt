@@ -1,0 +1,110 @@
+.
+├── 1703.Rproj
+├── LICENSE
+├── README.md
+├── Rplot.png
+├── _bookdown.yml
+├── _bookdown_files
+│   └── Report-1703_files
+│       └── figure-html
+│           ├── colleges-1.png
+│           ├── degrees-1.png
+│           ├── factbookColleges-1.png
+│           ├── factbookDegrees-1.png
+│           ├── question1-1.png
+│           ├── question2-1.png
+│           ├── question21-1.png
+│           ├── question22-1.png
+│           ├── question23-1.png
+│           ├── question3-1.png
+│           ├── question4-1.png
+│           └── responses-1.png
+├── _output.yml
+├── art
+│   ├── discussion.png
+│   ├── logo.png
+│   ├── logo2.png
+│   └── question.png
+├── book.bib
+├── data
+│   ├── factbook_colleges.csv
+│   ├── factbook_degrees.csv
+│   ├── grad_survey_colleges.csv
+│   ├── grad_survey_degrees.csv
+│   └── grad_survey_questions.csv
+├── disqus.html
+├── docs
+│   ├── Report-1703.pdf
+│   ├── Report-1703_files
+│   │   └── figure-html
+│   │       ├── colleges-1.png
+│   │       ├── degrees-1.png
+│   │       ├── factbookColleges-1.png
+│   │       ├── factbookDegrees-1.png
+│   │       ├── question1-1.png
+│   │       ├── question2-1.png
+│   │       ├── question21-1.png
+│   │       ├── question22-1.png
+│   │       ├── question23-1.png
+│   │       ├── question3-1.png
+│   │       ├── question4-1.png
+│   │       └── responses-1.png
+│   ├── art
+│   │   ├── discussion.png
+│   │   ├── logo.png
+│   │   ├── logo2.png
+│   │   └── question.png
+│   ├── data
+│   │   └── registrations.csv
+│   ├── index.html
+│   ├── introduction.html
+│   ├── libs
+│   │   ├── gitbook-2.6.7
+│   │   │   ├── css
+│   │   │   │   ├── fontawesome
+│   │   │   │   │   └── fontawesome-webfont.ttf
+│   │   │   │   ├── plugin-bookdown.css
+│   │   │   │   ├── plugin-fontsettings.css
+│   │   │   │   ├── plugin-highlight.css
+│   │   │   │   ├── plugin-search.css
+│   │   │   │   └── style.css
+│   │   │   └── js
+│   │   │       ├── app.min.js
+│   │   │       ├── jquery.highlight.js
+│   │   │       ├── lunr.js
+│   │   │       ├── plugin-bookdown.js
+│   │   │       ├── plugin-fontsettings.js
+│   │   │       ├── plugin-search.js
+│   │   │       └── plugin-sharing.js
+│   │   └── jquery-2.2.3
+│   │       └── jquery.min.js
+│   ├── methods.html
+│   ├── references.html
+│   ├── results.html
+│   ├── search_index.json
+│   ├── section-1.html
+│   ├── section.html
+│   ├── student-responses-to-survey-question-1.html
+│   └── style.css
+├── index.Rmd
+├── preamble.tex
+├── rawData
+│   ├── 09-10\ GFS\ Overall.pdf
+│   ├── 10-11\ GFS\ Overall.pdf
+│   ├── 10-11\ Summary.pdf
+│   ├── 11-12\ GFS\ Overall.pdf
+│   ├── 12-13\ GFS\ Overall.pdf
+│   ├── 13-14\ GFS\ Overall.pdf
+│   ├── 14-15\ GFS\ Overall.pdf
+│   ├── 15-16\ GFS\ Overall.pdf
+│   ├── 2015:2016.csv
+│   ├── FactBook16-17-4.pdf
+│   └── FactBook2012.pdf
+├── references.Rmd
+├── references.bib
+├── style.css
+├── testingCode.R
+├── totals.png
+└── tree.txt
+
+17 directories, 90 files

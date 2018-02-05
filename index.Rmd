@@ -31,7 +31,7 @@ biblio-style: apalike
 library(readr)          # read in data
 library(tidyr)	        # tidy data science
 library(plyr)           # data manipulations
-library(dplyr)         # data manipulations
+library(dplyr)          # data manipulations
 library(ggplot2)        # pretty graphing
 library(RColorBrewer)   # pretty color schemes
 library(pander)         # used to report session settings
@@ -291,6 +291,7 @@ Do you think that there are too many exams in this mix? What is the desired bala
 
 ## Response rate by college {#colleges -}
 Here is the distribution of graduates by academic college for the past six years.
+
 ```{R factbookColleges, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Distribution of graduates by academic college per academic year"}
 
 #----------------------------------------------------------------------------------------
@@ -312,6 +313,7 @@ ggplot(data = factbookColleges, aes(x=year, y=percent, group=College, fill=Colle
 
 
 And here is the distribution of responses by college.
+
 ```{R colleges, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Percent of student survey responses by academic college per academic year"}
 
 #----------------------------------------------------------------------------------------

@@ -11,6 +11,12 @@ bookdown::gitbook:
         <li><a href="https://bookdown.org/yihui/bookdown/" target="blank">Published with bookdown</a></li>
       edit: https://github.com/WeeBeasties/1703/blob/master/%s
       download: [pdf]
+    sharing:
+      facebook: yes
+      twitter: yes
+      google: yes
+      linkedin: yes
+
 bookdown::pdf_book:
   includes:
     in_header: preamble.tex

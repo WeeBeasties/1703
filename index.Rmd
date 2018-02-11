@@ -177,7 +177,7 @@ plot23$'Total positive (3+4)' <- plot23$`4: Strongly Agree`+plot23$`3: Somewhat 
 > _Assessment is not a spreadsheet; it's a conversation._
 > --- Irmeli Halinen
 
-Student satisfaction data from the Ferris post-graduation surveys were compared from the 2010/2011 to 2015/2016 academic years. During this timespan, the response rate has noticeably improved. The lowest return rate (17%) was obtained in 2010/2011 and the highest (27%) was collected in 2015/2016. The average number of responses was `r round(mean(totals$responses),0)` per year (approximately 25%) for the time interval covered by this report.  The distribution of students by credential and by college was roughly in line with the overall composition of the Ferris student body. Bachelor's and graduate degree students were somewhat over-represented and those in certificate and Associates degree programs were under-represented. Student satisfaction on most Likert scale items was modest and consistent over time. The item with the poorest scores was "how often have you recommended Ferris/Kendall to others". At this time, it is unclear why there is an apparent disconnect between student satisfaction and recommendation. Some suggestions are made for delving deeper into these results.
+Student satisfaction data from the Ferris post-graduation surveys were compared from the 2010/2011 to 2015/2016 academic years. During this timespan, the response rate has noticeably improved. The lowest return rate (17%) was obtained in 2010/2011 and the highest (27%) was collected in 2015/2016. The average number of responses was `r round(mean(totals$responses),0)` per year (approximately 25%) for the time interval covered by this report.  The distribution of students by credential and by college was roughly in line with the overall composition of the Ferris student body. Bachelor's and graduate degree students were somewhat over-represented and those in certificate and Associates degree programs were under-represented. Student satisfaction on most Likert scale items was modest and consistent over time. The item with the poorest scores was "how often have you recommended Ferris/Kendall to others". At this time, it is unclear why there is an apparent disconnect between student satisfaction and recommendation. Some thought questions are posed to stimulate discussion and lead to a deeper analysis of these graduate attitudes.
 
 # Introduction {#introduction -}
 Each year, Ferris State University performs surveys to obtain information related to student satisfaction, job placement, and any further academic achievements of its graduates. Annual reports are generated and are available [online](https://ferris.edu/admissions/testing/resources/followup/). The goal of this report is to compare the data collected in the surveys given since our last HLC accreditation visit. Special attention is given to identify any strengths, weaknesses, or developing trends. These findings may be of some use as we begin to prepare for our next accreditation visit. 
@@ -328,11 +328,12 @@ ggplot(data = degrees, aes(x=year, y=percent, group=Degree, fill=Degree)) +
 
 
 ```{block, type='question'}
-Do you think that there are too many exams in this mix? What is the desired balance between exams, products, and performances for General Education?
+Do you think that the bias for Bachelor and Graduate degrees is problematic? What steps can we take to ensure better reporting from students in Associates degrees and certificate programs?
 ```
 
-## Response rate by college {#colleges -}
-Here is the distribution of graduates by academic college for the past six years.
+## Response rate by college {#colleges -}  
+
+Another potential bias could be in the balance of students from various academic colleges. If one or more colleges predominate the survey population, they could skew the results and make interpretation more difficult. The actual distribution of graduates by academic college are shown in Figure \@ref(fig:factbookColleges).
 
 ```{R factbookColleges, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Distribution of graduates by academic college per academic year"}
 
@@ -354,7 +355,7 @@ ggplot(data = factbookColleges, aes(x=year, y=percent, group=College, fill=Colle
 ```
 
 
-And here is the distribution of responses by college.
+Figure \@ref(fig:colleges), in contrast demonstrates the distribution of survey respondants by academic college. The first thing that is apparent is that Kendall College of Art and Design (KCAD) was not included in the 2010/2011 and 2011/2012 datasets. The colleges of Business and Health Professions are slightly over-represented. KCAD, on the other hand, remains somewhat under-represented. The overall proportions are reasonably similar and stable over time. Given these facts, the last four years of data are probably representative enough to make some valid generalizations.
 
 ```{R colleges, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Percent of student survey responses by academic college per academic year"}
 
@@ -377,12 +378,12 @@ ggplot(data = colleges, aes(x=year, y=percent, group=College, fill=College)) +
 
 
 ```{block, type='question'}
-Do you think that there are too many exams in this mix? What is the desired balance between exams, products, and performances for General Education?
+Do you think that any effort needs to be made to get more representative sampling?
 ```
 
 ## Overall satisfaction ratings {#Q1 -}
 
-The overall satisfaction was `r round(mean(plot1$'Total positive (3+4)'),1)`%.
+The overall satisfaction of survey respondants was obtained by from item 1 of the survey: _I am satisfied with the quality of education that I recieved at Ferris State University/Kendall College of Art and Design_. The mean number of positive responses over the past four years was `r x = as.data.frame(plot1[3:6,12])` `r round(mean(x[1:4,1]),2)`%. The trends for responses to this item are shown in Figure \@ref(fig:question1). The ratio of respondants that "strongly agree" to "somewhat agree" was `r a = as.data.frame(plot1[3:6,11])` `r b = as.data.frame(plot1[3:6,10])` `r round(mean(a[1:4,1])/mean(b[1:4,1]),2)`:1. These results seem to represent a fairly high level of overall satisfaction among our responding graduates.
 
 ```{R question1, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="I am satisfied with the quality of education that I received at FSU/KCAD."}
 
@@ -408,10 +409,13 @@ plot1 %>%
 ```
 
 ```{block, type='question'}
-Do you think that there are too many exams in this mix? What is the desired balance between exams, products, and performances for General Education?
+Do you think that this level of overall satisfaction is sufficient? Or, is there a need to substantially increase this level?
 ```
 
-## Preparation for employment {#Q2 -}
+## Preparation for employment {#Q2 -}  
+
+Item two on the survey was _Ferris State University/Kendall College of Art and Design prepared me well for employment. The graduate responses are illustrated in Figure \@ref(fig:question2). For this item, the ratio of respondants that "strongly agree" to "somewhat agree" was `r a = as.data.frame(plot2[3:6,11])` `r b = as.data.frame(plot2[3:6,10])` `r round(mean(a[1:4,1])/mean(b[1:4,1]),2)`:1. The overall number of positive responses over the past four years was `r x = as.data.frame(plot2[3:6,12])` `r round(mean(x[1:4,1]),2)`%. These results are somewhat lower than those for item one, but are fairly stable over time.
+
 ```{R question2, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="FSU/KCAD prepared me well for employment."}
 
 #----------------------------------------------------------------------------------------
@@ -436,10 +440,13 @@ plot2 %>%
 ```
 
 ```{block, type='question'}
-Do you think that there are too many exams in this mix? What is the desired balance between exams, products, and performances for General Education?
+One out of seven graduates did not feel that FSU/KCAD prepared them well for employment. Is this a problem? What can we do to learn more about these unsatisfied graduates?
 ```
 
-## Preparation for continuing education {#Q3 -}
+## Preparation for continuing education {#Q3 -}  
+
+The third item of the survey was _Ferris State University/Kendall College of Art and Design prepared me well for continuing my education._ The graduate responses are illustrated in Figure \@ref(fig:question3). For this item, the ratio of respondants that "strongly agree" to "somewhat agree" was `r a = as.data.frame(plot3[3:6,11])` `r b = as.data.frame(plot3[3:6,10])` `r round(mean(a[1:4,1])/mean(b[1:4,1]),2)`:1. The overall number of positive responses over the past four years was `r x = as.data.frame(plot3[3:6,12])` `r round(mean(x[1:4,1]),2)`%. These results are nearly the same as those of item two. Given that Graduate and Bachelors degree recipients are over-represented in our sample, these numbers are perhaps a bit low.
+
 ```{R question3, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="FSU/KCAD prepared me well for continuing my education."}
 
 #----------------------------------------------------------------------------------------
@@ -464,10 +471,13 @@ plot3 %>%
 ```
 
 ```{block, type='question'}
-Do you think that there are too many exams in this mix? What is the desired balance between exams, products, and performances for General Education?
+One out of seven graduates were not satisfied with their preparation for their continuing education. How can we identify any issues or problems so that they can be addressed?
 ```
 
-## Good value for the money {#Q4 -}
+## Good value for the money {#Q4 -}  
+
+The cost of higher education has continued to increase over the past decade. It is interesting to see if this increase has impacted students' perceptions regarding the value that they get for their money. Item four on the survey was _Ferris State University/Kendall College of Art and Design was a good value for my money._ The graduate responses are illustrated in Figure \@ref(fig:question4). For this item, the ratio of respondants that "strongly agree" to "somewhat agree" was `r a = as.data.frame(plot4[3:6,11])` `r b = as.data.frame(plot4[3:6,10])` `r round(mean(a[1:4,1])/mean(b[1:4,1]),2)`:1. The overall number of positive responses over the past four years was `r x = as.data.frame(plot4[3:6,12])` `r round(mean(x[1:4,1]),2)`%.
+
 ```{R question4, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="FSU/KCAD was a good value for my money."}
 
 #----------------------------------------------------------------------------------------
@@ -492,10 +502,13 @@ plot4 %>%
 ```
 
 ```{block, type='question'}
-Do you think that there are too many exams in this mix? What is the desired balance between exams, products, and performances for General Education?
+One out of five graduates does not feel that they got a good value for their money from FSU/Kendall. While it is not surprising that this value is lower, what can we do to increase the value that students perceive from their education at FSU/KCAD?
 ```
 
-## Recommendation of Ferris/KCAD {#Q21 -}
+## Recommendation of Ferris/KCAD {#Q21 -}  
+
+Our graduates are probably the best advertisement that we have for our institution. Item twenty-one addresses this and it phrase as _Since graduating, how often have you recommended FSU/KCAD to prospective students?_ The graduate responses are illustrated in Figure \@ref(fig:question21). For this item, the ratio of respondants that recommended Ferris "often" to "a few times" was only `r a = as.data.frame(plot21[3:6,11])` `r b = as.data.frame(plot21[3:6,10])` `r round(mean(a[1:4,1])/mean(b[1:4,1]),2)`:1. The overall number of positive responses over the past four years was `r x = as.data.frame(plot21[3:6,12])` `r round(mean(x[1:4,1]),2)`%. This is by far the lowest score for all the items on the survey.
+
 ```{R question21, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Since graduating, how often have you recommended FSU/KCAD to prospective students?"}
 
 #----------------------------------------------------------------------------------------
@@ -520,10 +533,13 @@ plot21 %>%
 ```
 
 ```{block, type='question'}
-Do you think that there are too many exams in this mix? What is the desired balance between exams, products, and performances for General Education?
+Only half of all respondants indicated that they recommended FSU/KCAD to others very often. What do you think accounts for the apparent discrepancy between satisfaction and recommendation? What can we do to encourage our graduates to recommend FSU/KCAD more in the future?
 ```
 
 ## Would choose FSU/KCAD again {#Q22 -}
+
+Item twenty-two also indicates satisfaction with Ferris State University and/or Kendall College of Art and Design overall. It was worded as _If I had the opportunity to start college over, I would still choose to attend Ferris State University/Kendall College of Art and Design._ The graduate responses are illustrated in Figure \@ref(fig:question22). For this item, the ratio of respondants that "strongly agree" to "somewhat agree" was `r a = as.data.frame(plot22[3:6,11])` `r b = as.data.frame(plot22[3:6,10])` `r round(mean(a[1:4,1])/mean(b[1:4,1]),2)`:1. The overall number of positive responses over the past four years was `r x = as.data.frame(plot22[3:6,12])` `r round(mean(x[1:4,1]),2)`%.
+
 ```{R question22, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="If I had the opportunity to start college over, I would still choose to attend FSU/KCAD."}
 
 #----------------------------------------------------------------------------------------
@@ -547,7 +563,7 @@ plot22 %>%
 
 ```
 
-NSSE results are shown for comparison in Figure \@ref(fig:NSSE).
+A very similar item also appears in the National Survey of Student Engagement (NSSE). It was worded as _If you could start over again, would you go to the same institution you are now attending?_ The responses for freshmen and seniors taking the NSSE are illustrated in Figure \@ref(fig:NSSE). These NSSE scores are similar to those of the graduate surveys, but seem to have a more negative trend over time.
 
 ```{R NSSE, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="If you could start over again, would you go to the same institution you are now attending?"}
 
@@ -574,10 +590,13 @@ NSSEPlot
 
 
 ```{block, type='question'}
-Do you think that there are too many exams in this mix? What is the desired balance between exams, products, and performances for General Education?
+One out of five graduates state that they would not attend FSU/KCAD if they had it all to do over again. The NSSE results are even a bit worse. How can we identify and address the factors that contribute to this dissatisfaction?
 ```
 
 ## Would choose the same program again {#Q23 -}
+
+Many students come to Ferris specifically for a particular program. As a result, these students often have more affinity for their program than they do to the overall institution. The last item evaluated (item twenty-three) addresses this as _If I had the opportunity to start college over, I would still choose the same program of study._  The graduate responses are illustrated in Figure \@ref(fig:question22). For this item, the ratio of respondants that "strongly agree" to "somewhat agree" was `r a = as.data.frame(plot23[3:6,11])` `r b = as.data.frame(plot23[3:6,10])` `r round(mean(a[1:4,1])/mean(b[1:4,1]),2)`:1. The overall number of positive responses over the past four years was `r x = as.data.frame(plot23[3:6,12])` `r round(mean(x[1:4,1]),2)`%. The overall score for programs is actually _lower_ than for the entire instituation (by a little). The ratio of "strongly agree" to "somewhat agree", though, is much higher.
+
 ```{R question23, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="If I had the opportunity to start college over, I would still choose the same program of study."}
 
 #----------------------------------------------------------------------------------------
@@ -602,5 +621,5 @@ plot23 %>%
 ```
 
 ```{block, type='question'}
-Do you think that there are too many exams in this mix? What is the desired balance between exams, products, and performances for General Education?
+Despite our strong academic programs, one out of five graduates would not consider choosing their program again. What can we do to identify the causes of this dissatisfaction? There is most likely a correlation between items 22 and 23. Do you think that one impacts the other? If so, in which direction does that causal link fall?
 ```

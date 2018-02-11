@@ -177,21 +177,62 @@ plot23$'Total positive (3+4)' <- plot23$`4: Strongly Agree`+plot23$`3: Somewhat 
 > _Assessment is not a spreadsheet; it's a conversation._
 > --- Irmeli Halinen
 
-Student satisfaction data from the Ferris post-graduation surveys were compared from the 2010/2011 to 2015/2016 academic years. Over this timespan, the response rate has noticeably improved. The lowest return rate (17%) was obtained in 2010/2011 and the highest (27%) was collected in 2015/2016. The average number of responses was `r round(mean(totals$responses),0)` per year for the time interval covered by this report.  The distribution of students by credential and by college was roughly in line with the overall composition of the Ferris student body. Bachelor's and graduate degree students were somewhat over-represented and those in certificate programs were under-represented. Student satisfaction on most Likert scale items was fairly high and stable over time. The item with the poorest scores was "how often have you recommended Ferris/Kendall to others". At this time, it is unclear why there is an apparent disconnect between student satisfaction and recommendation.  
+Student satisfaction data from the Ferris post-graduation surveys were compared from the 2010/2011 to 2015/2016 academic years. During this timespan, the response rate has noticeably improved. The lowest return rate (17%) was obtained in 2010/2011 and the highest (27%) was collected in 2015/2016. The average number of responses was `r round(mean(totals$responses),0)` per year (approximately 25%) for the time interval covered by this report.  The distribution of students by credential and by college was roughly in line with the overall composition of the Ferris student body. Bachelor's and graduate degree students were somewhat over-represented and those in certificate and Associates degree programs were under-represented. Student satisfaction on most Likert scale items was modest and consistent over time. The item with the poorest scores was "how often have you recommended Ferris/Kendall to others". At this time, it is unclear why there is an apparent disconnect between student satisfaction and recommendation. Some suggestions are made for delving deeper into these results.
 
 # Introduction {#introduction -}
-
+Each year, Ferris State University performs surveys to obtain information related to student satisfaction, job placement, and any further academic achievements of its graduates. Annual reports are generated and are available [online](https://ferris.edu/admissions/testing/resources/followup/). The goal of this report is to compare the data collected in the surveys given since our last HLC accreditation visit. Special attention is given to identify any strengths, weaknesses, or developing trends. These findings may be of some use as we begin to prepare for our next accreditation visit. 
 
 # Methods {#methods -}
 
 ## Data collection {#data -}
-All registration records for the fall of 2017 were collated and de-identified. The data file, 'registrations.csv', contains only the course name (e.g. BIOL 101), the core competency (e.g. Natural Sciences), and the standardized measure (e.g. Selected Response Exam). The datafile is [available here](data/registrations.csv).
+All of the original graduate surveys used in this report are stored in the rawData folder of the related RStudio project. These files were used to create three separate working data files, which are stored in the data folder. These files are as follows:  
+
+* **grad_survey_colleges.csv**  
+	* Year = academic year of survey
+	* College = two-letter abbreviation of the academic college
+	* responses = number of valid student responses
+  
+* **grad_survey_degrees.csv**  
+	* Year = academic year of survey
+	* Degree = academic credential earned
+	* responses = number of valid student responses  
+  
+* **grad_survey_questions.csv**  
+	* year = academic year of survey
+	* item = the question number from the survey
+	* level0 = number of non-responses
+	* level1 = number of students selecting the lowest possible score
+	* level2 = number of students selecting the second lowest score
+	* level3 = number of students selecting the second highest score
+	* level4 = number of students selecting the highest score
+  
+The actual numbers of graduates by college and by academic credential awarded were derived from information in the Ferris Factbooks. These resources are also available  [online](https://ferris.edu/admissions/testing/factbook/homepage.htm). The numbers used in this report were taken from the 2012/2013 and 2016/2017 Factbooks. A pdf version of each of these is also available in the rawData folder. This information was used to prepare two more data files (each in the data folder):
+
+* **factbook_colleges.csv**  
+	* Year = academic year of survey
+	* College = two-letter abbreviation of the academic college
+	* responses = number of graduates in the college
+  
+* **factbook_degrees.csv**  
+	* Year = academic year of survey
+	* Degree = academic credential earned
+	* responses = number of graduates earning the credential    
+
+Finally, student satisfaction data from the National Survey of Student Engagement (NSSE) were obtained. This subset of NSSE data can also be found in the data folder:
+
+* **NSSE_satisfaction.csv**  
+	* Year = Year that the NSSE was administered
+	* Class = Class standing (freshman or senior)
+	* 1. Definitely No = Percent of students responding
+	* 2. Probably No = Percent of students responding
+	* 3. Probably Yes = Percent of students responding
+	* 4. Definitely Yes = Percent of students responding
 
 ## Data provenance {-}
 Data provenance refers to a system that permits tracking of the origin, movement, modification, and utilization of data sets [@Buneman2001]. The provenance of General Education data will be explicitly declared to facilitate the reproducibility and extensibility of these studies.
 
 ### Location of public website files {-}
-All files related to this report can be found online at the Open Science Framework [@Nosek2012]. This site contains all of the files needed to reproduce this report from the de-identified data set. The site's url is [https://osf.io/t6u8m/](https://osf.io/t6u8m/).
+All files related to this report can be found online at the Open Science Framework [@Nosek2012]. This site contains all of the files and instructions needed to reproduce this report from the de-identified data set. The site's url is [https://osf.io/YPCQD/](https://osf.io/YPCQD/).
 
 ### Session information {-}
 This report was written using RStudio [@Rstudio] and the R statistical programming language [@R]. These products are free to download for PC, Macintosh, and Linux operating systems. The following information pertains to the session parameters used to generate this report. If you have trouble reproducing this report, it may be due to different session parameters. You may contact [Dr. Franklund](mailto:CliftonFranklund@ferris.edu) if you need assistance.
@@ -207,20 +248,18 @@ This project produced a computationally reproducible assessment report (this doc
 2. [An installation of the RStudio IDE](https://www.rstudio.com/products/rstudio/download3/)
 3. [An installation of LaTeX](https://www.latex-project.org/get/)
 
-The necessary source files include the de-identified data set (BIOL200Data.csv), Rmarkdown code files (index.Rmd, 01-Introduction.Rmd, 02-Methods.Rmd, 03-Results.Rmd, 04-Discussion.Rmd, and 05-References.Rmd), bibtex reference file (references.bib), and custom art file in the /art folder.
-
-To process the files, you must first open the project in RStudio. Click on the "Build Book" button in the Build menu. Bookdown allows you to build this project as git_book (html site), pdf_book (via LaTeX), or epub_book (compatible with iBooks and other e-book readers).
+The necessary instructions for using these tools are given on the OSF site in the project wiki.
 
 ### Citation of this work {-}
 All of the de-identified data, analysis code, and documentation that constitute this report project may be freely used, modified, and shared. The de-identified data set, BIOL200Data.csv, is released under the Creative Commons [CC0 license](https://creativecommons.org/publicdomain/zero/1.0/). All documentation, including README.md, Codebook.md, and this report, are released under the Creative Commons [CC-BY](https://creativecommons.org/licenses/by/4.0/) licence. Any questions, comments, or suggestions may be sent to [Dr. Franklund](mailto:CliftonFranklund@ferris.edu).
 
 # Results and Discussion {#results -}  
 
-The response rates and their overall composition were compared for the six academic years under investigation. Responses to seven of the more quantitative questions (numbers 1, 2, 3, 4, 21, 22, and 23) were also examined. In general, student satisfaction is fairly constant or slightly improving. A more complete examination of each comparision is provided below.
+The response rates and their overall composition were compared for the six academic years under investigation. Responses to seven of the more quantitative questions (numbers 1, 2, 3, 4, 21, 22, and 23) were also examined. In general, student satisfaction is fairly consistent, if perhaps a bit low. A more complete examination of each comparision is provided below.
 
 ## Response rate by year {#responses -}
 
-Student response rates for the graduation survey have generally been sufficient over the past six years to allow generalizations to be drawn for the entire population of Ferris graduates.  Figure \@ref(fig:responses) shows the total number of alumni responses collected each academic year. The fewest responses, `r totals[totals$responses==min(totals$responses),2]`, were collected in `r totals[totals$responses==min(totals$responses),1]` (17% response rate). There has been a steady improvement in response rate since that time. The overall average response rate was `r round(mean(totals$responses),0)` per year for the interval investigated (approximately a 25% overall return rate). 
+Student response rates for the graduation survey have generally been sufficient over the past six years to allow generalizations to be drawn for the entire population of Ferris graduates. Figure \@ref(fig:responses) shows the total number of alumni responses collected each academic year. The fewest responses, `r totals[totals$responses==min(totals$responses),2]`, were collected in `r totals[totals$responses==min(totals$responses),1]` (17% response rate). There has been a steady improvement in response rate since that time. The overall average response rate was `r round(mean(totals$responses),0)` per year for the interval investigated (approximately a 25% overall return rate). Samples of this size ought to give estimates with a margin or error between two and four percent.
 
 ```{R responses, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Total number of student survey responses per academic year"}
 
@@ -243,8 +282,10 @@ ggplot(data = totals, aes(x=year, y=responses, label=responses)) +
 Is a response rate of under 30% adequate? What should our target reponse rate be for this instrument? What can be done differently to increase our response rate further?
 ```
 
-## Response rate by degree earned {#degrees -}
-Here is the actual distribution of credentials awarded by Ferris for each of the past six years.
+## Response rate by degree earned {#degrees -}  
+
+In order to reliably generalize the findings of these surveys, the demographics of the survey population should also be similar to that of the overall student body at Ferris State University. Therefore, the percent of respondants by credential earned were compared to the percent of actual credentials earned for each year under study, Figure \@ref(fig:factbookDegrees) shows the actual distribution of credentials awarded by Ferris for each of the past six years.
+
 ```{R factbookDegrees, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Distribution of credentials awarded by Ferris per academic year"}
 
 #----------------------------------------------------------------------------------------
@@ -263,7 +304,8 @@ ggplot(data = factbookDegrees, aes(x=year, y=percent, group=Degree, fill=Degree)
 	theme(text = element_text(size=13), legend.position="top",legend.direction="horizontal")
 
 ```
-Here is the response rate by degree.
+
+In comparison, Figure \@ref(fig:degrees) illustrates the distribution of credentials earned by the survey respondants. It is readily apparent that Bachelors and Graduate (Masters, Doctoral, and Professional) degrees are over-represented in the survey population. On the other hand, Associates degrees and certificates are under-represented. This reporting bias should be kept in mind while interpreting the survey responses that follow.
 
 ```{R degrees, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Percent of student survey responses by degree earned per academic year"}
 

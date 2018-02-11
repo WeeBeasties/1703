@@ -114,14 +114,73 @@
 <h1>Methods</h1>
 <div id="data" class="section level2 unnumbered">
 <h2>Data collection</h2>
-<p>All registration records for the fall of 2017 were collated and de-identified. The data file, ‘registrations.csv’, contains only the course name (e.g. BIOL 101), the core competency (e.g. Natural Sciences), and the standardized measure (e.g. Selected Response Exam). The datafile is <a href="data/registrations.csv">available here</a>.</p>
+<p>All of the original graduate surveys used in this report are stored in the rawData folder of the related RStudio project. These files were used to create three separate working data files, which are stored in the data folder. These files are as follows:</p>
+<ul>
+<li><strong>grad_survey_colleges.csv</strong>
+<ul>
+<li>Year = academic year of survey</li>
+<li>College = two-letter abbreviation of the academic college</li>
+<li>responses = number of valid student responses</li>
+</ul></li>
+<li><strong>grad_survey_degrees.csv</strong>
+<ul>
+<li>Year = academic year of survey</li>
+<li>Degree = academic credential earned</li>
+<li>responses = number of valid student responses</li>
+</ul></li>
+<li><strong>grad_survey_questions.csv</strong>
+<ul>
+<li>year = academic year of survey</li>
+<li>item = the question number from the survey</li>
+<li>level0 = number of non-responses</li>
+<li>level1 = number of students selecting the lowest possible score</li>
+<li>level2 = number of students selecting the second lowest score</li>
+<li>level3 = number of students selecting the second highest score</li>
+<li>level4 = number of students selecting the highest score</li>
+</ul></li>
+</ul>
+<p>The actual numbers of graduates by college and by academic credential awarded were derived from information in the Ferris Factbooks. These resources are also available <a href="https://ferris.edu/admissions/testing/factbook/homepage.htm">online</a>. The numbers used in this report were taken from the 2012/2013 and 2016/2017 Factbooks. A pdf version of each of these is also available in the rawData folder. This information was used to prepare two more data files (each in the data folder):</p>
+<ul>
+<li><strong>factbook_colleges.csv</strong>
+<ul>
+<li>Year = academic year of survey</li>
+<li>College = two-letter abbreviation of the academic college</li>
+<li>responses = number of graduates in the college</li>
+</ul></li>
+<li><strong>factbook_degrees.csv</strong>
+<ul>
+<li>Year = academic year of survey</li>
+<li>Degree = academic credential earned</li>
+<li>responses = number of graduates earning the credential</li>
+</ul></li>
+</ul>
+<p>Finally, student satisfaction data from the National Survey of Student Engagement (NSSE) were obtained. This subset of NSSE data can also be found in the data folder:</p>
+<ul>
+<li><strong>NSSE_satisfaction.csv</strong>
+<ul>
+<li>Year = Year that the NSSE was administered</li>
+<li>Class = Class standing (freshman or senior)</li>
+<li><ol style="list-style-type: decimal">
+<li>Definitely No = Percent of students responding</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: decimal">
+<li>Probably No = Percent of students responding</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: decimal">
+<li>Probably Yes = Percent of students responding</li>
+</ol></li>
+<li><ol start="4" style="list-style-type: decimal">
+<li>Definitely Yes = Percent of students responding</li>
+</ol></li>
+</ul></li>
+</ul>
 </div>
 <div id="data-provenance" class="section level2 unnumbered">
 <h2>Data provenance</h2>
 <p>Data provenance refers to a system that permits tracking of the origin, movement, modification, and utilization of data sets <span class="citation">(Buneman, Khanna, and Wang-Chiew <a href="references.html#ref-Buneman2001">2001</a>)</span>. The provenance of General Education data will be explicitly declared to facilitate the reproducibility and extensibility of these studies.</p>
 <div id="location-of-public-website-files" class="section level3 unnumbered">
 <h3>Location of public website files</h3>
-<p>All files related to this report can be found online at the Open Science Framework <span class="citation">(Nosek <a href="references.html#ref-Nosek2012">2012</a>)</span>. This site contains all of the files needed to reproduce this report from the de-identified data set. The site’s url is <a href="https://osf.io/t6u8m/" class="uri">https://osf.io/t6u8m/</a>.</p>
+<p>All files related to this report can be found online at the Open Science Framework <span class="citation">(Nosek <a href="references.html#ref-Nosek2012">2012</a>)</span>. This site contains all of the files and instructions needed to reproduce this report from the de-identified data set. The site’s url is <a href="https://osf.io/YPCQD/" class="uri">https://osf.io/YPCQD/</a>.</p>
 </div>
 <div id="session-information" class="section level3 unnumbered">
 <h3>Session information</h3>
@@ -141,8 +200,7 @@
 <li><a href="https://www.rstudio.com/products/rstudio/download3/">An installation of the RStudio IDE</a></li>
 <li><a href="https://www.latex-project.org/get/">An installation of LaTeX</a></li>
 </ol>
-<p>The necessary source files include the de-identified data set (BIOL200Data.csv), Rmarkdown code files (index.Rmd, 01-Introduction.Rmd, 02-Methods.Rmd, 03-Results.Rmd, 04-Discussion.Rmd, and 05-References.Rmd), bibtex reference file (references.bib), and custom art file in the /art folder.</p>
-<p>To process the files, you must first open the project in RStudio. Click on the “Build Book” button in the Build menu. Bookdown allows you to build this project as git_book (html site), pdf_book (via LaTeX), or epub_book (compatible with iBooks and other e-book readers).</p>
+<p>The necessary instructions for using these tools are given on the OSF site in the project wiki.</p>
 </div>
 <div id="citation-of-this-work" class="section level3 unnumbered">
 <h3>Citation of this work</h3>

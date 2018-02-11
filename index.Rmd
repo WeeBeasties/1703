@@ -355,7 +355,7 @@ ggplot(data = factbookColleges, aes(x=year, y=percent, group=College, fill=Colle
 ```
 
 
-Figure \@ref(fig:colleges), in contrast demonstrates the distribution of survey respondants by academic college. The first thing that is apparent is that Kendall College of Art and Design (KCAD) was not included in the 2010/2011 and 2011/2012 datasets. The colleges of Business and Health Professions are slightly over-represented. KCAD, on the other hand, remains somewhat under-represented. The overall proportions are reasonably similar and stable over time. Given these facts, the last four years of data are probably representative enough to make some valid generalizations.
+Figure \@ref(fig:colleges), in contrast, demonstrates the distribution of survey respondants by academic college. The first thing that is apparent is that Kendall College of Art and Design (KCAD) was not included in the 2010/2011 and 2011/2012 datasets. The colleges of Business and Health Professions are slightly over-represented. KCAD, on the other hand, remains somewhat under-represented. The overall proportions are reasonably similar and stable over time. Given these facts, the last four years of data are probably representative enough to make some valid generalizations.
 
 ```{R colleges, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Percent of student survey responses by academic college per academic year"}
 
@@ -414,7 +414,7 @@ Do you think that this level of overall satisfaction is sufficient? Or, is there
 
 ## Preparation for employment {#Q2 -}  
 
-Item two on the survey was _Ferris State University/Kendall College of Art and Design prepared me well for employment. The graduate responses are illustrated in Figure \@ref(fig:question2). For this item, the ratio of respondants that "strongly agree" to "somewhat agree" was `r a = as.data.frame(plot2[3:6,11])` `r b = as.data.frame(plot2[3:6,10])` `r round(mean(a[1:4,1])/mean(b[1:4,1]),2)`:1. The overall number of positive responses over the past four years was `r x = as.data.frame(plot2[3:6,12])` `r round(mean(x[1:4,1]),2)`%. These results are somewhat lower than those for item one, but are fairly stable over time.
+Item two on the survey was _Ferris State University/Kendall College of Art and Design prepared me well for employment._ The graduate responses are illustrated in Figure \@ref(fig:question2). For this item, the ratio of respondants that "strongly agree" to "somewhat agree" was `r a = as.data.frame(plot2[3:6,11])` `r b = as.data.frame(plot2[3:6,10])` `r round(mean(a[1:4,1])/mean(b[1:4,1]),2)`:1. The overall number of positive responses over the past four years was `r x = as.data.frame(plot2[3:6,12])` `r round(mean(x[1:4,1]),2)`%. These results are somewhat lower than those for item one, but are fairly stable over time.
 
 ```{R question2, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="FSU/KCAD prepared me well for employment."}
 

@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="introduction.html">
+<link rel="prev" href="introduction.html">
+<link rel="next" href="results.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -111,25 +111,103 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Ferris Graduate Survey Summary 2010-2016<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></h1>
-<h3 class="subtitle"><em>An overview of student satisfaction data</em></h3>
-<h4 class="author"><em>Dr. Clifton Franklund</em></h4>
-<h4 class="author"><em>General Education Coordinator</em></h4>
-<h4 class="date"><em>Fall 2017</em></h4>
+<div id="methods" class="section level1 unnumbered">
+<h1>Methods</h1>
+<div id="data" class="section level2 unnumbered">
+<h2>Data collection</h2>
+<p>All of the original graduate surveys used in this report are stored in the rawData folder of the related RStudio project. These files were used to create three separate working data files, which are stored in the data folder. These files are as follows:</p>
+<ul>
+<li><strong>grad_survey_colleges.csv</strong>
+<ul>
+<li>Year = academic year of survey</li>
+<li>College = two-letter abbreviation of the academic college</li>
+<li>responses = number of valid student responses</li>
+</ul></li>
+<li><strong>grad_survey_degrees.csv</strong>
+<ul>
+<li>Year = academic year of survey</li>
+<li>Degree = academic credential earned</li>
+<li>responses = number of valid student responses</li>
+</ul></li>
+<li><strong>grad_survey_questions.csv</strong>
+<ul>
+<li>year = academic year of survey</li>
+<li>item = the question number from the survey</li>
+<li>level0 = number of non-responses</li>
+<li>level1 = number of students selecting the lowest possible score</li>
+<li>level2 = number of students selecting the second lowest score</li>
+<li>level3 = number of students selecting the second highest score</li>
+<li>level4 = number of students selecting the highest score</li>
+</ul></li>
+</ul>
+<p>The actual numbers of graduates by college and by academic credential awarded were derived from information in the Ferris Factbooks. These resources are also available <a href="https://ferris.edu/admissions/testing/factbook/homepage.htm">online</a>. The numbers used in this report were taken from the 2012/2013 and 2016/2017 Factbooks. A pdf version of each of these is also available in the rawData folder. This information was used to prepare two more data files (each in the data folder):</p>
+<ul>
+<li><strong>factbook_colleges.csv</strong>
+<ul>
+<li>Year = academic year of survey</li>
+<li>College = two-letter abbreviation of the academic college</li>
+<li>responses = number of graduates in the college</li>
+</ul></li>
+<li><strong>factbook_degrees.csv</strong>
+<ul>
+<li>Year = academic year of survey</li>
+<li>Degree = academic credential earned</li>
+<li>responses = number of graduates earning the credential</li>
+</ul></li>
+</ul>
+<p>Finally, student satisfaction data from the National Survey of Student Engagement (NSSE) were obtained. This subset of NSSE data can also be found in the data folder:</p>
+<ul>
+<li><strong>NSSE_satisfaction.csv</strong>
+<ul>
+<li>Year = Year that the NSSE was administered</li>
+<li>Class = Class standing (freshman or senior)</li>
+<li><ol style="list-style-type: decimal">
+<li>Definitely No = Percent of students responding</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: decimal">
+<li>Probably No = Percent of students responding</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: decimal">
+<li>Probably Yes = Percent of students responding</li>
+</ol></li>
+<li><ol start="4" style="list-style-type: decimal">
+<li>Definitely Yes = Percent of students responding</li>
+</ol></li>
+</ul></li>
+</ul>
 </div>
-<div id="abstract" class="section level1 unnumbered">
-<h1>Abstract</h1>
-<blockquote>
-<p><em>Assessment is not a spreadsheet; it’s a conversation.</em> — Irmeli Halinen</p>
-</blockquote>
-<p>Student satisfaction data from the Ferris post-graduation surveys were compared from the 2010/2011 to 2015/2016 academic years. During this timespan, the response rate has noticeably improved. The lowest return rate (17%) was obtained in 2010/2011 and the highest (27%) was collected in 2015/2016. The average number of responses was 829 per year (approximately 25%) for the time interval covered by this report. The distribution of students by credential and by college was roughly in line with the overall composition of the Ferris student body. Bachelor’s and graduate degree students were somewhat over-represented and those in certificate and Associates degree programs were under-represented. Student satisfaction on most Likert scale items was modest and consistent over time. The item with the poorest scores was “how often have you recommended Ferris/Kendall to others”. At this time, it is unclear why there is an apparent disconnect between student satisfaction and recommendation. Some thought questions are posed to stimulate discussion and lead to a deeper analysis of these graduate attitudes.</p>
+<div id="data-provenance" class="section level2 unnumbered">
+<h2>Data provenance</h2>
+<p>Data provenance refers to a system that permits tracking of the origin, movement, modification, and utilization of data sets <span class="citation">(Buneman, Khanna, and Wang-Chiew <a href="references.html#ref-Buneman2001">2001</a>)</span>. The provenance of General Education data will be explicitly declared to facilitate the reproducibility and extensibility of these studies.</p>
+<div id="location-of-public-website-files" class="section level3 unnumbered">
+<h3>Location of public website files</h3>
+<p>All files related to this report can be found online at the Open Science Framework <span class="citation">(Nosek <a href="references.html#ref-Nosek2012">2012</a>)</span>. This site contains all of the files and instructions needed to reproduce this report from the de-identified data set. The site’s url is <a href="https://osf.io/YPCQD/" class="uri">https://osf.io/YPCQD/</a>.</p>
 </div>
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>Report number 1703, DOI <a href="https://doi.org/10.17605/OSF.IO/YPCQD">10.17605/OSF.IO/YPCQD</a><a href="#fnref1">↩</a></p></li>
+<div id="session-information" class="section level3 unnumbered">
+<h3>Session information</h3>
+<p>This report was written using RStudio <span class="citation">(RStudio Team <a href="references.html#ref-Rstudio">2015</a>)</span> and the R statistical programming language <span class="citation">(R Core Team <a href="references.html#ref-R">2013</a>)</span>. These products are free to download for PC, Macintosh, and Linux operating systems. The following information pertains to the session parameters used to generate this report. If you have trouble reproducing this report, it may be due to different session parameters. You may contact <a href="mailto:CliftonFranklund@ferris.edu">Dr. Franklund</a> if you need assistance.</p>
+<p><strong>R version 3.4.3 (2017-11-30)</strong></p>
+<p>**<a href="Platform:**" class="uri">Platform:**</a> x86_64-apple-darwin15.6.0 (64-bit)</p>
+<p><strong>locale:</strong> en_US.UTF-8||en_US.UTF-8||en_US.UTF-8||C||en_US.UTF-8||en_US.UTF-8</p>
+<p><strong>attached base packages:</strong> <em>stats</em>, <em>graphics</em>, <em>grDevices</em>, <em>utils</em>, <em>datasets</em>, <em>methods</em> and <em>base</em></p>
+<p><strong>other attached packages:</strong> <em>bindrcpp(v.0.2)</em>, <em>pander(v.0.6.1)</em>, <em>RColorBrewer(v.1.1-2)</em>, <em>ggplot2(v.2.2.1)</em>, <em>dplyr(v.0.7.4)</em>, <em>plyr(v.1.8.4)</em>, <em>tidyr(v.0.8.0)</em> and <em>readr(v.1.1.1)</em></p>
+<p><strong>loaded via a namespace (and not attached):</strong> <em>Rcpp(v.0.12.15)</em>, <em>rstudioapi(v.0.7)</em>, <em>bindr(v.0.1)</em>, <em>knitr(v.1.19)</em>, <em>magrittr(v.1.5)</em>, <em>hms(v.0.4.1)</em>, <em>munsell(v.0.4.3)</em>, <em>colorspace(v.1.3-2)</em>, <em>R6(v.2.2.2)</em>, <em>rlang(v.0.1.6)</em>, <em>stringr(v.1.2.0)</em>, <em>tools(v.3.4.3)</em>, <em>grid(v.3.4.3)</em>, <em>gtable(v.0.2.0)</em>, <em>xfun(v.0.1)</em>, <em>htmltools(v.0.3.6)</em>, <em>lazyeval(v.0.2.1)</em>, <em>assertthat(v.0.2.0)</em>, <em>yaml(v.2.1.16)</em>, <em>rprojroot(v.1.3-2)</em>, <em>digest(v.0.6.15)</em>, <em>tibble(v.1.4.2)</em>, <em>bookdown(v.0.6.2)</em>, <em>purrr(v.0.2.4)</em>, <em>glue(v.1.2.0)</em>, <em>evaluate(v.0.10.1)</em>, <em>rmarkdown(v.1.8)</em>, <em>stringi(v.1.1.6)</em>, <em>compiler(v.3.4.3)</em>, <em>pillar(v.1.1.0)</em>, <em>scales(v.0.5.0)</em>, <em>backports(v.1.1.2)</em> and <em>pkgconfig(v.2.0.1)</em></p>
+</div>
+<div id="processing-instructions" class="section level3 unnumbered">
+<h3>Processing instructions</h3>
+<p>This project produced a computationally reproducible assessment report (this document). Anyone wishing to recreate this report from the source document will need to install the following on their computer:</p>
+<ol style="list-style-type: decimal">
+<li><a href="https://www.r-project.org">An installation of the R programming language</a></li>
+<li><a href="https://www.rstudio.com/products/rstudio/download3/">An installation of the RStudio IDE</a></li>
+<li><a href="https://www.latex-project.org/get/">An installation of LaTeX</a></li>
 </ol>
+<p>The necessary instructions for using these tools are given on the OSF site in the project wiki.</p>
+</div>
+<div id="citation-of-this-work" class="section level3 unnumbered">
+<h3>Citation of this work</h3>
+<p>All of the de-identified data, analysis code, and documentation that constitute this report project may be freely used, modified, and shared. The de-identified data set, BIOL200Data.csv, is released under the Creative Commons <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 license</a>. All documentation, including README.md, Codebook.md, and this report, are released under the Creative Commons <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY</a> licence. Any questions, comments, or suggestions may be sent to <a href="mailto:CliftonFranklund@ferris.edu">Dr. Franklund</a>.</p>
+</div>
+</div>
 </div>
 <div id="disqus_thread"></div>
 <script>
@@ -156,8 +234,8 @@ s.setAttribute('data-timestamp', +new Date());
           </div>
         </div>
       </div>
-
-<a href="introduction.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="results.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -623,3 +623,10 @@ plot23 %>%
 ```{block, type='question'}
 Despite our strong academic programs, one out of five graduates would not consider choosing their program again. What can we do to identify the causes of this dissatisfaction? There is most likely a correlation between items 22 and 23. Do you think that one impacts the other? If so, in which direction does that causal link fall?
 ```
+
+# Epilogue {#epilogue -}  
+
+Based upon the discussions to date, here are some observations, interpretations, and suggested future actions.
+
+**March 14, 2018:**
+The consensus of opinion thus far is that the results are suggestive, but not all that helpful for making rational decision making. I tend to agree. This report was constructed using aggregated data. Therefore, it is not possible to merge in other variables that could be helpful (like demographic data). It may be possible to obtain the raw data as SPSS .sav files. These data would have student ID numbers and allow a deeper look at the patterns seen here. This may be the single best option for a future action at this time. Any other thoughts?
